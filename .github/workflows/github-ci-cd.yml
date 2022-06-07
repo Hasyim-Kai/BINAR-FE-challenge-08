@@ -50,6 +50,9 @@ jobs:
     if: github.event.ref == 'refs/heads/staging'
 
     steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v3
+
     - name: Download build files artifact
       uses: actions/download-artifact@v3
       with:
@@ -72,6 +75,9 @@ jobs:
     if: github.event.ref == 'refs/heads/main'
 
     steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v3
+
     - name: Download build files artifact
       uses: actions/download-artifact@v3
       with:
