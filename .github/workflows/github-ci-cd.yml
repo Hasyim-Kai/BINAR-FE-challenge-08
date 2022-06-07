@@ -35,12 +35,6 @@ jobs:
         npm run build
         npm test
 
-    - name: Upload build files to Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-files
-        path: ./build
-
 
   staging-deploy:
     name: Staging Deployment
@@ -50,19 +44,16 @@ jobs:
     if: github.event.ref == 'refs/heads/staging'
 
     steps:
-    - name: Download build files artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: build-files
-        path: ./build
+    - name: Checkout 🛎️
+      uses: actions/checkout@v3
     
     - name: Deploy the Staging App to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          args: deploy --dir=build --prod
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: 'challenge-08-staging'
-          heroku_email: 'bakabrain69@gmail.com'
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: 'challenge-08-staging'
+        heroku_email: 'bakabrain69@gmail.com'
+        branch: 'staging'
 
   production-deploy:
     name: Production Deployment
@@ -72,16 +63,13 @@ jobs:
     if: github.event.ref == 'refs/heads/main'
 
     steps:
-    - name: Download build files artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: build-files
-        path: ./build
+    - name: Checkout 🛎️
+      uses: actions/checkout@v3
     
     - name: Deploy the Production App to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          args: deploy --dir=build --prod
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: 'challenge-08-production'
-          heroku_email: 'bakabrain69@gmail.com'
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: 'challenge-08-production'
+        heroku_email: 'bakabrain69@gmail.com'
+        branch: 'production'
