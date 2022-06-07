@@ -35,12 +35,6 @@ jobs:
         npm run build
         npm test
 
-    - name: Upload build files to Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-files
-        path: ./build
-
 
   staging-deploy:
     name: Staging Deployment
@@ -52,20 +46,14 @@ jobs:
     steps:
     - name: Checkout 🛎️
       uses: actions/checkout@v3
-
-    - name: Download build files artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: build-files
-        path: ./build
     
     - name: Deploy the Staging App to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
-        appdir: 'build'
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: 'challenge-08-staging'
         heroku_email: 'bakabrain69@gmail.com'
+        branch: 'staging'
 
   production-deploy:
     name: Production Deployment
@@ -77,17 +65,11 @@ jobs:
     steps:
     - name: Checkout 🛎️
       uses: actions/checkout@v3
-
-    - name: Download build files artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: build-files
-        path: ./build
     
     - name: Deploy the Production App to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
-        appdir: 'build'
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: 'challenge-08-production'
         heroku_email: 'bakabrain69@gmail.com'
+        branch: 'production'
