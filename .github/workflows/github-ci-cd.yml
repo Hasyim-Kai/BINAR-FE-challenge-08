@@ -56,8 +56,13 @@ jobs:
         name: build-files
         path: ./build
     
-    - name: Deploy the App
-      run: echo "Staging Deploy App Success"
+    - name: Deploy the Staging App to Heroku
+      uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          args: deploy --dir=build --prod
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'challenge-08-staging'
+          heroku_email: 'bakabrain69@gmail.com'
 
   production-deploy:
     name: Production Deployment
@@ -73,5 +78,10 @@ jobs:
         name: build-files
         path: ./build
     
-    - name: Deploy the App
-      run: echo "Production Deploy App Success"
+    - name: Deploy the Production App to Heroku
+      uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          args: deploy --dir=build --prod
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'challenge-08-production'
+          heroku_email: 'bakabrain69@gmail.com'
