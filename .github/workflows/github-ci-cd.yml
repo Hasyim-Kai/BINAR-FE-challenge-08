@@ -32,3 +32,13 @@ jobs:
 
     - name: Test the App
       run: npm test
+
+
+  Staging Deploy:
+    environment: Staging
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy the App
+      run: echo "Deploy App Success"
