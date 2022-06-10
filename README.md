@@ -1,4 +1,13 @@
-# :closed_lock_with_key::key: BINAR FE Challenge-06
-#### Authentication & Authorization + Google Login with Firebase Web App implementation
-#### Built with :point_down:
-### :trumpet: Tech Stack : React + Typescript + Tailwind
+# :snowboarder: BINAR FE Challenge-08
+
+### CI/CD Implementation with Staging & Production Environment
+
+## :fishing_pole_and_fish: Use Github Actions
+
+![Github-Actions](./public/github-actions.png)
+<br>
+
+## :dart: Deploy to Heroku
+
+![Heroku](./public/heroku.png)
+<br>
